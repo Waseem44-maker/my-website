@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Sector Jobs - Pakistan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .job-card-header {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+        }
+        
+        .job-card-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        
+        .job-card-header p {
+            margin: 5px 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .job-card-body {
+            padding: 20px;
+        }
+        
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .job-meta i {
+            margin-right: 5px;
+            color: #3498db;
+        }
+        
+        .job-description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .apply-btn {
+            display: inline-block;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .apply-btn:hover {
+            background: #27ae60;
+        }
+        
+        .stats-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        .testimonial {
+            background: #3498db;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+        
+        /* NEW STYLES ADDED BELOW */
+        .search-bar {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #2980b9;
+        }
+        
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .category-btn {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .newsletter {
+            background: #2c3e50;
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .newsletter h2 {
+            margin-top: 0;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 20px auto 0;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background: #c0392b;
+        }
+        
+        .company-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px 0;
+        }
+        
+        .company-logo {
+            height: 50px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-logo:hover {
+            opacity: 1;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-link {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-link:hover {
+            color: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 4px;
+                padding: 12px;
+            }
+        }
+    header {
+            background: linear-gradient(135deg, #01411c, #046a38);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #01411c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 18px 15px;
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            background-color: #046a38;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            background-color: white;
+            width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0 0 5px 5px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li a {
+            color: #333;
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-menu li a:hover {
+            background-color: #f5f5f5;
+            color: #01411c;
+        }
+        
+        .dropdown-toggle::after {
+            content: ' ▼';
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+     <header>
+        <div class="logo-container">
+            <div class="logo">Pakistan Jobs</div>
+        </div>
+        <p class="tagline">Connecting talent with opportunities across Pakistan</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Jobs</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="government-jobs.html">Government Jobs</a></li>
+                        <li><a href="private-sector.html">Private Sector</a></li>
+                        <li><a href="international.html">International</a></li>
+                        <li><a href="freelance.html">Freelance</a></li>
+                    </ul>
+                </li>
+                <li><a href="scholarships.html">Scholarships</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Downloads</a>
+                    <ul class="dropdown-menu">
+                       
+              
+                       <li> <a href="cv-template.html">CV Templates</a></li> 
+            
+                        
+                      <li><a href="Application Forms.html">Application Forms</a></li> 
+                        <li><a href="Interview Guide.html">Interview Guide</a></li>
+                        <li><a href="#">Career Resources</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h1>Private Sector Jobs</h1>
+            <p>Explore career opportunities with leading private companies in Pakistan</p>
+        </div>
+        
+        <!-- NEW SEARCH BAR SECTION -->
+        <div class="search-bar">
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Job title, keywords">
+                <input type="text" class="search-input" placeholder="City or location">
+                <button type="submit" class="search-btn">Search Jobs</button>
+            </form>
+            <div class="category-filter">
+                <div class="category-btn active">All Jobs</div>
+                <div class="category-btn">IT & Software</div>
+                <div class="category-btn">Banking</div>
+                <div class="category-btn">Engineering</div>
+                <div class="category-btn">Marketing</div>
+                <div class="category-btn">Healthcare</div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h2>Pakistan's Growing Private Sector</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12.5%</div>
+                    <div class="stat-label">Annual Growth Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Multinational Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Of Pakistan's Workforce</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW COMPANY LOGOS SECTION -->
+        <div class="company-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Systems_Limited_Logo.svg/1200px-Systems_Limited_Logo.svg.png" alt="Systems Limited" class="company-logo" style="height: 40px;">
+            <img src="https://www.engro.com/wp-content/uploads/2020/04/Engro-logo.png" alt="Engro" class="company-logo">
+            <img src="https://www.jazz.com.pk/assets/images/logo.png" alt="Jazz" class="company-logo">
+            <img src="https://www.hbl.com/assets/images/HBL-logo.png" alt="HBL" class="company-logo">
+            <img src="https://www.nishatmills.com/wp-content/uploads/2020/04/Nishat-Mills-Limited.png" alt="Nishat Mills" class="company-logo">
+        </div>
+        
+        <div class="job-listings">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Systems Limited</h3>
+                    <p>Software Engineers</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 30 Sep 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Systems Limited is hiring Software Engineers with expertise in .NET, Java, and Python. Minimum 2 years experience required. Competitive salary package with health benefits and annual bonuses.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Engro Corporation</h3>
+                    <p>Project Manager</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 15 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Engro seeks an experienced Project Manager for their energy division. PMP certification preferred. Must have 5+ years experience managing large-scale industrial projects.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Jazz (VEON)</h3>
+                    <p>Digital Marketing Specialist</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Islamabad</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 25 Sep 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Jazz is looking for a creative Digital Marketing Specialist with expertise in social media campaigns and analytics. Experience with telecom sector preferred.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <h2>Success Stories</h2>
+            <blockquote>
+                "I found my dream job through this portal. The application process was smooth and I got hired as a Senior Developer at a leading tech firm within 3 weeks!"
+                <cite>- Ahmed Raza, Karachi</cite>
+            </blockquote>
+        </div>
+        
+        <div class="job-listings">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Habib Bank Limited</h3>
+                    <p>Relationship Manager</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Multiple Cities</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 10 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>HBL is expanding its retail banking team. Seeking Relationship Managers with 3+ years banking experience. Attractive commission structure with base salary.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Nishat Mills</h3>
+                    <p>Textile Engineer</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Faisalabad</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 5 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Nishat Mills requires Textile Engineers for their production units. Fresh graduates with textile degrees are encouraged to apply. Comprehensive training provided.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Careem (Uber)</h3>
+                    <p>Data Analyst</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 20 Sep 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Careem is hiring Data Analysts to work on their mobility platform. Strong SQL and Python skills required. Experience with big data tools is a plus.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW NEWSLETTER SECTION -->
+        <div class="newsletter">
+            <h2>Get Job Alerts in Your Inbox</h2>
+            <p>Subscribe to our newsletter and be the first to know about new job openings</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+        
+        <!-- NEW FOOTER SECTION -->
+        <div class="footer">
+            <p>© 2023 Pakistan Private Sector Jobs Portal. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

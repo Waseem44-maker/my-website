@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Career Hub | International Job Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/connected.png');
+            opacity: 0.1;
+        }
+        
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .flag-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .flag-icon {
+            width: 40px;
+            height: 25px;
+            object-fit: cover;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .flag-icon:hover {
+            transform: scale(1.2);
+        }
+        
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .job-card-header {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .job-card-header::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--primary);
+        }
+        
+        .job-card-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .job-card-header p {
+            margin: 8px 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .job-card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .job-meta i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 16px;
+            text-align: center;
+        }
+        
+        .salary-tag {
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .job-description {
+            margin-bottom: 25px;
+            color: #475569;
+            flex-grow: 1;
+        }
+        
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-tag {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .apply-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .apply-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        /* NEW GLOBAL SEARCH SECTION */
+        .global-search {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: -30px auto 40px;
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 15px;
+        }
+        
+        .search-input {
+            padding: 14px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .search-select {
+            padding: 14px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: #334155;
+        }
+        
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .search-btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* FEATURED COUNTRIES */
+        .featured-countries {
+            margin: 50px 0;
+        }
+        
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .country-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            text-align: center;
+            padding: 25px 15px;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .country-flag {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .country-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .country-jobs {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* TESTIMONIAL */
+        .testimonial {
+            background: linear-gradient(135deg, var(--dark), #0f172a);
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        
+        .testimonial::after {
+            content: """;
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        
+        .testimonial h2 {
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial blockquote {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial cite {
+            display: block;
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+        }
+        
+        /* NEWSLETTER */
+        .newsletter {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter::after {
+            content: """;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/always-grey.png');
+            opacity: 0.1;
+        }
+        
+        .newsletter h2 {
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+        
+        .newsletter-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background: #059669;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .footer-link {
+            color: #475569;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .social-link {
+            color: #64748b;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+        }
+        
+        .social-link:hover {
+            color: white;
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .search-form {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .search-form button {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-form button {
+                grid-column: span 1;
+            }
+            
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+            
+            .global-search {
+                margin-top: 0;
+            }
+            
+            .testimonial,
+            .newsletter {
+                padding: 30px;
+            }
+        }
+     header {
+            background: linear-gradient(135deg, #01411c, #046a38);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #01411c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 18px 15px;
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            background-color: #046a38;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            background-color: white;
+            width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0 0 5px 5px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li a {
+            color: #333;
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-menu li a:hover {
+            background-color: #f5f5f5;
+            color: #01411c;
+        }
+        
+        .dropdown-toggle::after {
+            content: ' ▼';
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+     <header>
+        <div class="logo-container">
+            <div class="logo">Pakistan Jobs</div>
+        </div>
+        <p class="tagline">Connecting talent with opportunities across Pakistan</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Jobs</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="government-jobs.html">Government Jobs</a></li>
+                        <li><a href="private-sector.html">Private Sector</a></li>
+                        <li><a href="international.html">International</a></li>
+                        <li><a href="freelance.html">Freelance</a></li>
+                    </ul>
+                </li>
+                <li><a href="scholarships.html">Scholarships</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Downloads</a>
+                    <ul class="dropdown-menu">
+                       
+              
+                       <li> <a href="cv-template.html">CV Templates</a></li> 
+            
+                        
+                      <li><a href="Application Forms.html">Application Forms</a></li> 
+                        <li><a href="Interview Guide.html">Interview Guide</a></li>
+              
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h1>Global Career Hub</h1>
+            <p>Discover international career opportunities across 50+ countries</p>
+            <div class="flag-container">
+                <img src="https://flagcdn.com/w40/us.png" alt="USA" class="flag-icon">
+                <img src="https://flagcdn.com/w40/ca.png" alt="Canada" class="flag-icon">
+                <img src="https://flagcdn.com/w40/gb.png" alt="UK" class="flag-icon">
+                <img src="https://flagcdn.com/w40/au.png" alt="Australia" class="flag-icon">
+                <img src="https://flagcdn.com/w40/de.png" alt="Germany" class="flag-icon">
+                <img src="https://flagcdn.com/w40/ae.png" alt="UAE" class="flag-icon">
+                <img src="https://flagcdn.com/w40/sg.png" alt="Singapore" class="flag-icon">
+                <img src="https://flagcdn.com/w40/jp.png" alt="Japan" class="flag-icon">
+            </div>
+        </div>
+        
+        <!-- GLOBAL SEARCH SECTION -->
+        <div class="global-search">
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Job title, keywords, or company">
+                <select class="search-select">
+                    <option value="">Any Country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="gb">United Kingdom</option>
+                    <option value="au">Australia</option>
+                    <option value="de">Germany</option>
+                    <option value="ae">UAE</option>
+                    <option value="sg">Singapore</option>
+                    <option value="sa">Saudi Arabia</option>
+                    <option value="qa">Qatar</option>
+                    <option value="my">Malaysia</option>
+                </select>
+                <select class="search-select">
+                    <option value="">Any Category</option>
+                    <option value="it">IT & Software</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="finance">Finance</option>
+                    <option value="education">Education</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="construction">Construction</option>
+                    <option value="hospitality">Hospitality</option>
+                </select>
+                <button type="submit" class="search-btn">Search Jobs</button>
+            </form>
+        </div>
+        
+        <!-- FEATURED COUNTRIES -->
+        <div class="featured-countries">
+            <h2>Featured Countries</h2>
+            <div class="countries-grid">
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/us.png" alt="USA" class="country-flag">
+                    <div class="country-name">United States</div>
+                    <div class="country-jobs">1,240+ Jobs Available</div>
+                </div>
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/ca.png" alt="Canada" class="country-flag">
+                    <div class="country-name">Canada</div>
+                    <div class="country-jobs">890+ Jobs Available</div>
+                </div>
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/gb.png" alt="UK" class="country-flag">
+                    <div class="country-name">United Kingdom</div>
+                    <div class="country-jobs">750+ Jobs Available</div>
+                </div>
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/au.png" alt="Australia" class="country-flag">
+                    <div class="country-name">Australia</div>
+                    <div class="country-jobs">680+ Jobs Available</div>
+                </div>
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/ae.png" alt="UAE" class="country-flag">
+                    <div class="country-name">United Arab Emirates</div>
+                    <div class="country-jobs">1,150+ Jobs Available</div>
+                </div>
+                <div class="country-card">
+                    <img src="https://flagcdn.com/w80/de.png" alt="Germany" class="country-flag">
+                    <div class="country-name">Germany</div>
+                    <div class="country-jobs">920+ Jobs Available</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- JOB LISTINGS -->
+        <h2>Latest International Job Openings</h2>
+        <div class="job-listings">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/us.png" alt="USA"> Google</h3>
+                    <p>Senior Software Engineer</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Mountain View, USA</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 15 Nov 2023</span>
+                    </div>
+                    <div class="salary-tag">$120,000 - $180,000 per year</div>
+                    <div class="job-description">
+                        <p>Google is looking for an experienced Senior Software Engineer to join our Cloud team. You'll work on developing scalable infrastructure and solving complex distributed systems problems.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Distributed Systems</span>
+                        <span class="skill-tag">Cloud</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/ca.png" alt="Canada"> Shopify</h3>
+                    <p>Product Manager</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Ottawa, Canada</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 30 Oct 2023</span>
+                    </div>
+                    <div class="salary-tag">CA$95,000 - CA$130,000 per year</div>
+                    <div class="job-description">
+                        <p>Shopify is hiring a Product Manager to lead the development of new commerce features. You'll work closely with engineering, design, and business teams to build products that empower entrepreneurs worldwide.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Product Management</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">E-commerce</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/ae.png" alt="UAE"> Emirates Group</h3>
+                    <p>Aviation Engineer</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Dubai, UAE</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 20 Nov 2023</span>
+                    </div>
+                    <div class="salary-tag">AED 25,000 - AED 35,000 per month</div>
+                    <div class="job-description">
+                        <p>Emirates Group is seeking an Aviation Engineer to join our technical operations team. The role involves aircraft maintenance planning, technical troubleshooting, and ensuring compliance with aviation regulations.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Aircraft Maintenance</span>
+                        <span class="skill-tag">EASA/FAA</span>
+                        <span class="skill-tag">Technical Documentation</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/gb.png" alt="UK"> HSBC</h3>
+                    <p>Financial Analyst</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> London, UK</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 5 Nov 2023</span>
+                    </div>
+                    <div class="salary-tag">£45,000 - £65,000 per year</div>
+                    <div class="job-description">
+                        <p>HSBC is looking for a Financial Analyst to join our Global Banking team. You'll be responsible for financial modeling, market research, and supporting senior bankers in deal execution.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Financial Modeling</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Investment Banking</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/au.png" alt="Australia"> Atlassian</h3>
+                    <p>UX Designer</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Sydney, Australia</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 10 Dec 2023</span>
+                    </div>
+                    <div class="salary-tag">AU$110,000 - AU$140,000 per year</div>
+                    <div class="job-description">
+                        <p>Atlassian is hiring a UX Designer to create amazing experiences for our products. You'll work closely with product managers and engineers to design intuitive interfaces for our collaboration tools.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">User Research</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3><img src="https://flagcdn.com/w20/sa.png" alt="Saudi Arabia"> NEOM</h3>
+                    <p>Construction Project Manager</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> NEOM, Saudi Arabia</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 25 Nov 2023</span>
+                    </div>
+                    <div class="salary-tag">SAR 35,000 - SAR 45,000 per month</div>
+                    <div class="job-description">
+                        <p>NEOM is seeking an experienced Construction Project Manager to oversee megaprojects in our futuristic city. You'll lead cross-functional teams to deliver innovative, sustainable infrastructure projects.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Construction</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Mega Projects</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TESTIMONIAL -->
+        <div class="testimonial">
+            <h2>Global Success Stories</h2>
+            <blockquote>
+                "Through Global Career Hub, I landed my dream job at a tech company in Berlin. The visa sponsorship process was challenging, but the portal provided all the resources I needed. Now I'm growing my career internationally with a competitive European salary!"
+                <cite>- Ayesha Khan, Software Developer at Zalando (Germany)</cite>
+            </blockquote>
+        </div>
+        
+        <!-- NEWSLETTER -->
+        <div class="newsletter">
+            <h2>Get Global Job Alerts</h2>
+            <p>Subscribe to receive the latest international job openings and visa sponsorship opportunities</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Countries</a>
+                <a href="#" class="footer-link">Visa Guides</a>
+                <a href="#" class="footer-link">Salary Calculator</a>
+                <a href="#" class="footer-link">Success Stories</a>
+                <a href="#" class="footer-link">Employers</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">© 2023 Global Career Hub. All rights reserved. Helping professionals build international careers since 2015.</p>
+        </div>
+    </div>
+</body>
+</html>

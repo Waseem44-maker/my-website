@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Jobs - Government Jobs</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(255,255,255,0.9);
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #01411c, #046a38);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background-color: #01411c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 18px 15px;
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            background-color: #046a38;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            background-color: white;
+            width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0 0 5px 5px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li a {
+            color: #333;
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-menu li a:hover {
+            background-color: #f5f5f5;
+            color: #01411c;
+        }
+        
+        .dropdown-toggle::after {
+            content: ' ▼';
+            font-size: 12px;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-header {
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            color: #046a38;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .job-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .job-card-header {
+            background-color: #046a38;
+            color: white;
+            padding: 20px;
+        }
+        
+        .job-card-header h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .job-card-body {
+            padding: 20px;
+        }
+        
+        .job-meta {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .job-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .job-meta i {
+            margin-right: 5px;
+            color: #046a38;
+        }
+        
+        .job-description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .apply-btn {
+            display: inline-block;
+            background-color: #046a38;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .apply-btn:hover {
+            background-color: #01411c;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #01411c;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .copyright {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #8bd8a0;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+            
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">Pakistan Jobs</div>
+        </div>
+        <p class="tagline">Connecting talent with opportunities across Pakistan</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Jobs</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="government-jobs.html">Government Jobs</a></li>
+                        <li><a href="private-sector.html">Private Sector</a></li>
+                        <li><a href="international.html">International</a></li>
+                        <li><a href="freelance.html">Freelance</a></li>
+                    </ul>
+                </li>
+                <li><a href="scholarships.html">Scholarships</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Downloads</a>
+                    <ul class="dropdown-menu">
+                       
+              
+                       <li> <a href="cv-template.html">CV Templates</a></li> 
+            
+                        
+                      <li><a href="Application Forms.html">Application Forms</a></li> 
+                        <li><a href="Interview Guide.html">Interview Guide</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+     <div class="container" id="main-content">
+        <div class="page-header">
+            <h1>Welcome to Pakistan Jobs</h1>
+            <p>Explore the latest career opportunities</p>
+        </div>
+    </div>
+
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Government Jobs</h1>
+            <p>Find the latest government employment opportunities across Pakistan</p>
+        </div>
+        
+        <div class="job-listings">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Federal Public Service Commission</h3>
+                    <p>Multiple Positions</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Islamabad</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 15 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>The Federal Public Service Commission is seeking qualified candidates for various positions including Section Officers, Assistant Directors, and Research Associates.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Punjab Police Department</h3>
+                    <p>Constables & Sub-Inspectors</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 30 Sep 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Punjab Police is recruiting for 1000+ positions of Constables and Sub-Inspectors. Minimum qualification is Intermediate for Constables and Bachelor's for SIs.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Education Department Sindh</h3>
+                    <p>Secondary School Teachers</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 10 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>The Sindh Education Department is hiring 500 Secondary School Teachers (SSTs) in various subjects including Mathematics, Physics, Chemistry, and English.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>KPK Health Department</h3>
+                    <p>Medical Officers</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Peshawar</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 25 Sep 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Khyber Pakhtunkhwa Health Department requires 200 Medical Officers (MOs) for various district hospitals across the province. MBBS degree required.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Balochistan Revenue Department</h3>
+                    <p>Tax Inspectors</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Quetta</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 5 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>The Balochistan Revenue Department is hiring Tax Inspectors for various districts. Candidates should have Bachelor's degree in Commerce or Business Administration.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>State Bank of Pakistan</h3>
+                    <p>Assistant Directors</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                        <span><i class="fas fa-calendar-alt"></i> Deadline: 20 Oct 2023</span>
+                    </div>
+                    <div class="job-description">
+                        <p>State Bank of Pakistan is recruiting Assistant Directors (OG-2) in various departments including Banking Policy, Payment Systems, and Financial Markets.</p>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2023 Pakistan Jobs. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
