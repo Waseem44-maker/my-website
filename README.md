@@ -9,3 +9,4 @@ HTML5 – Semantic markup
 CSS3 – Flexbox, Grid, and animations
 
 JavaScript – Dynamic functionality
+HTMl- semantic markup
